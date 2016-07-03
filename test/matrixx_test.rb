@@ -119,7 +119,7 @@ class TC_Eigen_MatrixX < Minitest::Test
         b = Eigen::VectorX.from_a([1, 2, 3, 4, 5, 6, 7])
         a = solver.solve(b)
 
-        assert m.dotV(a).approx?(b)
+        assert m.dotV(a).approx?(b), "expected #{m.dotV(a).to_a} to be approximately #{b.to_a}"
     end
 end
 
