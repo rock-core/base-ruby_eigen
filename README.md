@@ -1,6 +1,6 @@
 # Eigen
 
-[![Build Status](https://travis-ci.org/rock-core/base-ruby-eigen.svg?branch=master)](https://travis-ci.org/rock-core/base-ruby_eigen)
+[![Build Status](https://travis-ci.org/rock-core/base-ruby_eigen.svg?branch=master)](https://travis-ci.org/rock-core/base-ruby_eigen)
 [![Gem Version](https://badge.fury.io/rb/eigen.svg)](http://badge.fury.io/rb/eigen)
 [![Documentation](http://b.repl.ca/v1/yard-docs-blue.png)](http://rubydoc.info/gems/eigen/frames)
 
