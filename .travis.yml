@@ -1,0 +1,14 @@
+sudo: false
+language: ruby
+rvm:
+  - 2.1.9
+  - 2.2.5
+  - 2.3.1
+before_install: gem install bundler -v 1.12.1
+addons:
+    apt:
+        packages: libeigen3-dev
+script:
+    - rake
+    - rake test
+
