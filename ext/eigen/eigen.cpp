@@ -20,6 +20,88 @@ typedef Eigen::Transform< double, 3, Eigen::Isometry > Isometry3d;
 typedef Eigen::Transform< double, 3, Eigen::Affine > Affine3d;
 typedef Eigen::AngleAxis<double> AngleAxisd;
 
+/* 
+ * Document-class: Eigen::Vector3
+ *
+ * A 3-vector holding floating-point numbers
+ *
+ * @!method initialize(x = 0, y = 0, z = 0)
+ *   Creates a new vector
+ *   @param [Numeric] x
+ *   @param [Numeric] y
+ *   @param [Numeric] z
+ * @!method norm
+ *   The vector's norm
+ *   @return [Numeric]
+ * @!method normalize!
+ *   Normalizes self
+ *   @return [void]
+ * @!method normalize
+ *   Returns a normalized self
+ *   @return [Vector3]
+ * @!method [](index)
+ *   Returns an element
+ *   @param [Integer] index the element index (0, 1 or 2)
+ *   @return [Numeric]
+ * @!method x
+ *   Returns X
+ *   @return [Numeric]
+ * @!method y
+ *   Returns Y
+ *   @return [Numeric]
+ * @!method z
+ *   Returns Z
+ *   @return [Numeric]
+ * @!method x=(value)
+ *   Sets X
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method y=(value)
+ *   Sets Y
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method z=(value)
+ *   Sets Z
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method []=(index, value)
+ *   Sets an element
+ *   @param [Integer] index the element index (0, 1 or 2)
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method +(v)
+ *    Sum
+ *    @param [Vector3] v
+ *    @return [Vector3] the sum
+ * @!method -(v)
+ *    Subtracts
+ *    @param [Vector3] v
+ *    @return [Vector3] the subtraction
+ * @!method *(scalar)
+ *    Multiplies by a scalar
+ *    @param [Numeric] scalar the scalar
+ *    @return [Vector3] the result
+ * @!method /(scalar)
+ *    Divides by a scalar
+ *    @param [Numeric] scalar the scalar
+ *    @return [Vector3] the result
+ * @!method -@()
+ *    Negation
+ *    @return [Vector3] the result
+ * @!method cross(v)
+ *    Cross product
+ *    @param [VectorX] v
+ *    @return [VectorX] the result
+ * @!method dot(v)
+ *    Dot product
+ *    @param [VectorX] v
+ *    @return [VectorX] the result
+ * @!method approx?(v, threshold = dummy_precision)
+ *    Verifies that two vectors are within threshold of each other, elementwise
+ *    @param [Vector3]
+ *    @return [Boolean]
+ */
+
 struct Vector3
 {
     Vector3d* v;
@@ -68,6 +150,67 @@ struct Vector3
     { return v->isApprox(*other.v, tolerance); }
 };
 
+/* 
+ * Document-class: Eigen::VectorX
+ *
+ * A variable-length vector holding floating-point numbers
+ *
+ * @!method initialize(size = 0)
+ *   Creates a new vector
+ *   @param [Numeric] size
+ * @!method resize(new_size)
+ *   Changes the vector's size
+ *   @param [Integer] new_size
+ *   @return [Numeric]
+ * @!method norm
+ *   The vector's norm
+ *   @return [Numeric]
+ * @!method normalize!
+ *   Normalizes self
+ *   @return [void]
+ * @!method normalize
+ *   Returns a normalized self
+ *   @return [VectorX]
+ * @!method size
+ *   Returns the vector's size
+ *   @return [Integer]
+ * @!method [](index)
+ *   Returns an element
+ *   @param [Integer] index the element index (0, 1 or 2)
+ *   @return [Numeric]
+ * @!method []=(index, value)
+ *   Sets an element
+ *   @param [Integer] index the element index (0, 1 or 2)
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method +(v)
+ *    Sum
+ *    @param [VectorX] v
+ *    @return [VectorX] the sum
+ * @!method -(v)
+ *    Subtracts
+ *    @param [VectorX] v
+ *    @return [VectorX] the subtraction
+ * @!method *(scalar)
+ *    Multiplies by a scalar
+ *    @param [Numeric] scalar the scalar
+ *    @return [VectorX] the result
+ * @!method /(scalar)
+ *    Divides by a scalar
+ *    @param [Numeric] scalar the scalar
+ *    @return [VectorX] the result
+ * @!method -@()
+ *    Negation
+ *    @return [VectorX] the result
+ * @!method dot(v)
+ *    Dot product
+ *    @param [VectorX] v
+ *    @return [VectorX] the result
+ * @!method approx?(v, threshold = dummy_precision)
+ *    Verifies that two vectors are within threshold of each other, elementwise
+ *    @param [VectorX]
+ *    @return [Boolean]
+ */
 struct VectorX {
 
     VectorXd* v;
@@ -120,6 +263,62 @@ struct VectorX {
 
 };
 
+/* 
+ * Document-class: Eigen::Matrix4
+ *
+ * A 4x4 matrix holding floating-point numbers
+ *
+ * @!method rows
+ *    @return [Integer] the number of rows
+ * @!method cols
+ *    @return [Numeric] the number of columns
+ * @!method size
+ *    @return [Numeric] the number of elements
+ * @!method [](row, col)
+ *    Accesses an element
+ *    @param [Integer] row the element's row
+ *    @param [Integer] col the element's column
+ *    @return [Numeric] the required element
+ * @!method []=(row, col, value)
+ *    Sets an element
+ *    @param [Integer] row the element's row
+ *    @param [Integer] col the element's column
+ *    @param [Numeric] value the new value
+ *    @return [Numeric] the value
+ * @!method +(m)
+ *    Sums two matrices
+ *    @param [Matrix4] m the matrix to add
+ *    @return [Matrix4] the sum
+ * @!method -(m)
+ *    Subtracts two matrices
+ *    @param [Matrix4] m the matrix to subtract to self
+ *    @return [Matrix4] the subtraction
+ * @!method *(v)
+ *    Multiplies by a scalar
+ *    @param [Numeric] v the scalar
+ *    @return [Matrix4] the result
+ * @!method /(v)
+ *    Divides this matrix by a scalar
+ *    @param [Numeric] v the scalar
+ *    @return [Matrix4] the result
+ * @!method -@(v)
+ *    Returns this matrix' negation
+ *    @return [Matrix4] the result
+ * @!method T
+ *    Returns the transposed matrix
+ *    @return [Matrix4]
+ * @!method norm
+ *    Returns the matrix' norm
+ *    @return [Numeric]
+ * @!method dotM(m)
+ *    Matrix multiplication
+ *    @param [Matrix4]
+ *    @return [Numeric]
+ * @!method approx?(m, threshold = dummy_precision)
+ *    Verifies that two matrices are within threshold of each other, elementwise
+ *    @param [Matrix4]
+ *    @return [Boolean]
+ */
 struct Matrix4
 {
     Matrix4d* mx;
@@ -169,6 +368,18 @@ struct Matrix4
     { return mx->isApprox(*other.mx, tolerance); }
 };
 
+/* 
+ * Document-class: Eigen::JacobiSVD
+ *
+ * Linear problem solver
+ *
+ * This is not constructed directly. Use {Eigen::MatrixX#jacobiSvd} instead.
+ *
+ * @!method solve(vector)
+ *   Solves the linear problem for a given vector
+ *   @param [VectorX] vector
+ *   @return [VectorX] the result
+ */
 struct JacobiSVD {
     typedef Eigen::JacobiSVD<Eigen::MatrixXd::PlainObject> EigenT;
     EigenT* j;
@@ -184,6 +395,83 @@ struct JacobiSVD {
     { return new VectorX(j->solve(*y->v)); }
 };
 
+/* 
+ * Document-class: Eigen::MatrixX
+ *
+ * A variable-size matrix holding floating-point numbers
+ *
+ * @!method resize(rows, cols)
+ *    Resizes the matrix
+ *    @param [Integer] rows the new number of rows
+ *    @param [Integer] cols the new number of columns
+ * @!method rows
+ *    @return [Integer] the number of rows
+ * @!method cols
+ *    @return [Numeric] the number of columns
+ * @!method size
+ *    @return [Numeric] the number of elements
+ * @!method [](row, col)
+ *    Accesses an element
+ *    @param [Integer] row the element's row
+ *    @param [Integer] col the element's column
+ *    @return [Numeric] the required element
+ * @!method []=(row, col, value)
+ *    Sets an element
+ *    @param [Integer] row the element's row
+ *    @param [Integer] col the element's column
+ *    @param [Numeric] value the new value
+ *    @return [Numeric] the value
+ * @!method setRow(row, vector)
+ *    Sets a whole matrix row
+ *    @param [Integer] row the row index
+ *    @param [VectorX] vector the row values
+ * @!method setColumn(column, vector)
+ *    Sets a whole matrix column
+ *    @param [Integer] row the column index
+ *    @param [VectorX] vector the column values
+ * @!method +(m)
+ *    Sums two matrices
+ *    @param [MatrixX] m the matrix to add
+ *    @return [MatrixX] the sum
+ * @!method -(m)
+ *    Subtracts two matrices
+ *    @param [MatrixX] m the matrix to subtract to self
+ *    @return [MatrixX] the subtraction
+ * @!method *(v)
+ *    Multiplies by a scalar
+ *    @param [Numeric] v the scalar
+ *    @return [MatrixX] the result
+ * @!method /(v)
+ *    Divides this matrix by a scalar
+ *    @param [Numeric] v the scalar
+ *    @return [MatrixX] the result
+ * @!method -@(v)
+ *    Returns this matrix' negation
+ *    @return [MatrixX] the result
+ * @!method T
+ *    Returns the transposed matrix
+ *    @return [MatrixX]
+ * @!method norm
+ *    Returns the matrix' norm
+ *    @return [Numeric]
+ * @!method dotV(m)
+ *    Matrix/vector multiplication
+ *    @param [VectorX]
+ *    @return [Numeric]
+ * @!method dotM(m)
+ *    Matrix multiplication
+ *    @param [Matrix4]
+ *    @return [Numeric]
+ * @!method approx?(m, threshold = dummy_precision)
+ *    Verifies that two matrices are within threshold of each other, elementwise
+ *    @param [Matrix4]
+ *    @return [Boolean]
+ * @!method jacobiSvd(flags = 0)
+ *    Returns a SVD solver to find V from W in self.dotV(V) = W
+ *    @param [Integer] flags solver flags, as OR-ed values of Eigen::ComputeFullU,
+ *      Eigen::ComputeThinU and Eigen::ComputeThinV. See Eigen documentation
+ *    @return [JacobiSVD]
+ */
 struct MatrixX {
 
     MatrixXd* m;
@@ -246,6 +534,84 @@ struct MatrixX {
     { return m->isApprox(*other.m, tolerance); }
 };
 
+/*
+ * Document-class: Eigen::Quaternion
+ *
+ * A floating-point valued quaternion
+ *
+ * @!method w
+ *   The real part of the quaternion
+ *   @return [Numeric]
+ * @!method x
+ *   The first element of the imaginary part of the quaternion
+ *   @return [Numeric]
+ * @!method y
+ *   The second element of the imaginary part of the quaternion
+ *   @return [Numeric]
+ * @!method z
+ *   The third element of the imaginary part of the quaternion
+ *   @return [Numeric]
+ * @!method w=(value)
+ *   Sets the real part of the quaternion
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method x=(value)
+ *   Sets the first element of the imaginary part of the quaternion
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method y=(value)
+ *   Sets the second element of the imaginary part of the quaternion
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method z=(value)
+ *   Sets the third element of the imaginary part of the quaternion
+ *   @param [Numeric] value
+ *   @return [Numeric]
+ * @!method norm
+ *   The norm
+ *   @return [Numeric]
+ * @!method concatenate(q)
+ *   Quaternion multiplication
+ *   @param [Quaternion] q
+ *   @return [Quaternion] self * q
+ * @!method inverse
+ *   The quaternion inverse
+ *   @return [Quaternion]
+ * @!method transform(v)
+ *   Transform a vector-3 by this quaternion
+ *   @param [Vector3] v
+ *   @return [Vector3]
+ * @!method matrix
+ *   The rotation matrix equivalent to this unit quaternion
+ *   @return [MatrixX]
+ * @!method normalize!
+ *   Normalizes self
+ *   @return [void]
+ * @!method normalize
+ *   Returns the self normalized
+ *   @return [Quaternion]
+ * @!method approx?(q, threshold = dummy_precision)
+ *   Verifies that two quaternions are within threshold of each other, elementwise
+ *   @param [Quaternion]
+ *   @return [Boolean]
+ * @!method to_euler
+ *   Converts this quaternion into Euler-Bryant angles
+ *   @return [Vector3] a 3-vector where .x is roll (rotation around X), .y is
+ *     pitch and .z yaw
+ * @!method from_euler(v)
+ *   Initializes from euler angles
+ *   @param [Vector3] v a 3-vector where .x is roll (rotation around X), .y is
+ *     pitch and .z yaw
+ *   @return [void]
+ * @!method from_angle_axis(angle_axis)
+ *   Initializes from an angle-axis representation
+ *   @param [AngleAxis] an angle-axis representation of a rotation
+ *   @return [void]
+ * @!method from_matrix(matrix)
+ *   Initializes from a rotation matrix
+ *   @param [MatrixX]
+ *   @return [void]
+ */
 struct Quaternion
 {
     Quaterniond* q;
@@ -333,6 +699,51 @@ struct Quaternion
     }
 };
 
+
+/*
+ * Document-class: Eigen::AngleAxis
+ *
+ * A rotation represented by an axis and angle
+ *
+ * @!method angle
+ *   The angle (in radians)
+ *   @return [Numeric]
+ * @!method axis
+ *   The rotation axis
+ *   @return [Vector3]
+ * @!method concatenate(aa)
+ *   Combine this rotation with another rotation
+ *   @param [AngleAxis] aa
+ *   @return [AngleAxis]
+ * @!method inverse
+ *   The inverse rotation
+ *   @return [AngleAxis]
+ * @!method transform(v)
+ *   Apply this rotation on a 3-vector
+ *   @param [Vector3] v
+ *   @return [Vector3]
+ * @!method matrix
+ *   The rotation matrix equivalent to this unit quaternion
+ *   @return [MatrixX]
+ * @!method approx?(aa, threshold = dummy_precision)
+ *    Verifies that two angle-axis are within threshold of each other, elementwise
+ *    @param [AngleAxis]
+ *    @return [Boolean]
+ * @!method to_euler
+ *    Converts this quaternion into Euler-Bryant angles
+ *    @return [Vector3] a 3-vector where .x is roll (rotation around X), .y is
+ *      pitch and .z yaw
+ * @!method from_euler(v)
+ *    Initializes from euler angles
+ *    @param [Vector3] v a 3-vector where .x is roll (rotation around X), .y is
+ *      pitch and .z yaw
+ * @!method from_quaternion(q)
+ *    Initializes from a quaternion
+ *    @param [Quaternion] q
+ * @!method from_matrix(matrix)
+ *    Initializes from a rotation matrix
+ *    @param [MatrixX]
+ */
 struct AngleAxis
 {
     AngleAxisd* aa;
@@ -408,6 +819,48 @@ struct AngleAxis
 
 #include <iostream>
 
+/*
+ * Document-class: Eigen::Isometry3
+ *
+ * An isometry
+ *
+ * @!method approx?(v, threshold = dummy_precision)
+ *    Verifies that two isometries are within threshold of each other, elementwise
+ *    @param [Isometry3]
+ *    @return [Boolean]
+ * @!method inverse
+ *    The inverse transformation
+ *    @return [Isometry3]
+ * @!method translation
+ *    The translation part of this transformation
+ *    @return [Vector3]
+ * @!method rotation
+ *    The rotation part of this transformation
+ *    @return [Quaternion]
+ * @!method concatenate(is)
+ *    Concatenate self and another transformation
+ *    @param [Isometry3] is
+ *    @return [Isometry3]
+ * @!method translate(v)
+ *    Add a new translation after the rotation
+ *    @param [Vector3] v the translation
+ *    @return [void]
+ * @!method rotate(q)
+ *    Add a new rotation after the translation
+ *    @param [Quaternion] q the rotation
+ *    @return [void]
+ * @!method pretranslate(v)
+ *    Add a new translation before the rotation
+ *    @param [Vector3] v the translation
+ *    @return [void]
+ * @!method prerotate(q)
+ *    Add a new rotation before the translation
+ *    @param [Quaternion] q the rotation
+ *    @return [void]
+ * @!method matrix
+ *    The transformation matrix equivalent to self
+ *    @return [MatrixX]
+ */
 struct Isometry3
 {
     Isometry3d *t;
@@ -454,6 +907,49 @@ struct Isometry3
     { return t->isApprox(*other.t, tolerance); }
 };
 
+
+/*
+ * Document-class: Eigen::Affine3
+ *
+ * An affine transformation
+ *
+ * @!method approx?(v, threshold = dummy_precision)
+ *    Verifies that two transformations are within threshold of each other, elementwise
+ *    @param [Isometry3]
+ *    @return [Boolean]
+ * @!method inverse
+ *    The inverse transformation
+ *    @return [Affine3]
+ * @!method translation
+ *    The translation part of this transformation
+ *    @return [Vector3]
+ * @!method rotation
+ *    The rotation part of this transformation
+ *    @return [Quaternion]
+ * @!method concatenate(is)
+ *    Concatenate self and another transformation
+ *    @param [Affine3] is
+ *    @return [Affine3]
+ * @!method translate(v)
+ *    Add a new translation after the rotation
+ *    @param [Vector3] v the translation
+ *    @return [void]
+ * @!method rotate(q)
+ *    Add a new rotation after the translation
+ *    @param [Quaternion] q the rotation
+ *    @return [void]
+ * @!method pretranslate(v)
+ *    Add a new translation before the rotation
+ *    @param [Vector3] v the translation
+ *    @return [void]
+ * @!method prerotate(q)
+ *    Add a new rotation before the translation
+ *    @param [Quaternion] q the rotation
+ *    @return [void]
+ * @!method matrix
+ *    The transformation matrix equivalent to self
+ *    @return [MatrixX]
+ */
 struct Affine3
 {
     Affine3d *t;
@@ -501,7 +997,6 @@ struct Affine3
 };
 
 
-// The initialization method for this module
 extern "C" void Init_eigen()
 {
      Rice::Module rb_mEigen = define_module("Eigen");
