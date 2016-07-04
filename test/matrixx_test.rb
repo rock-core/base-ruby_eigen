@@ -8,6 +8,11 @@ class TC_Eigen_MatrixX < Minitest::Test
         assert_equal(m.size, 6)
     end
 
+    def test_Zero
+        m = Eigen::MatrixX.Zero(5, 3)
+        assert_equal ([0] * 15), m.to_a
+    end
+
     def test_base_vector
         v = Eigen::VectorX.new(10)
         assert_equal(v.size, 10)
@@ -103,7 +108,7 @@ class TC_Eigen_MatrixX < Minitest::Test
     end
 
     def test_dotV
-        m = Eigen::MatrixX.new(4,4)
+        m = Eigen::MatrixX.Zero(4,4)
         4.times { |i| m[i,i] = i + 1 }
         a = Eigen::VectorX.from_a([1, 2, 3, 4])
         b = m.dotV(a)
@@ -113,8 +118,8 @@ class TC_Eigen_MatrixX < Minitest::Test
     end
 
     def test_jacobisvd
-        m = Eigen::MatrixX.new(7,7)
-        7.times { |i| m[i,i] = i + 1 }
+        m = Eigen::MatrixX.Zero(7,7)
+        7.times { |i| m[i,i] = 1 }
         solver = m.jacobiSvd(Eigen::ComputeThinU | Eigen::ComputeThinV)
         b = Eigen::VectorX.from_a([1, 2, 3, 4, 5, 6, 7])
         a = solver.solve(b)

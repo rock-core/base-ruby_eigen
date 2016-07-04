@@ -5,6 +5,16 @@ module Eigen
             MatrixX.from_a(to_a, rows, cols)
         end
 
+        def self.Zero(rows, cols)
+            m = new(rows, cols)
+            rows.times do |r|
+                cols.times do |c|
+                    m[r, c] = 0
+                end
+            end
+            m
+        end
+
         def self.from_a(*args)
             m = new
             m.from_a(*args)
