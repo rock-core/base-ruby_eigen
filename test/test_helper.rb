@@ -45,10 +45,17 @@ module Eigen
         def teardown
             super
         end
+
+        def assert_approx_equal(expected, actual, tolerance = 0.0001)
+            assert(expected.approx?(actual, tolerance), "expected #{expected} to be approximately equal to #{actual}")
+        end
+        def refute_approx_equal(expected, actual, tolerance = 0.0001)
+            refute(expected.approx?(actual, tolerance), "expected #{expected} to not be approximately equal to #{actual}")
+        end
     end
 end
 
 class Minitest::Test
-    extend Eigen::SelfTest
+    include Eigen::SelfTest
 end
 

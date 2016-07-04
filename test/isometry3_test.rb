@@ -18,13 +18,13 @@ class TC_Eigen_Isometry3 < Minitest::Test
 	t = Eigen::Isometry3.from_position_orientation( v, q )
 
 	p1 = Eigen::Vector3.new(1,1,1)
-	assert( (t * p1).approx?(q * p1) )
-	assert( (t.rotation * p1).approx?(q * p1) )
+        assert_approx_equal (t * p1), (q * p1)
+        assert_approx_equal (t.rotation * p1), (q * p1)
 
 	vt = t.translation
 	qt = t.rotation
-	assert( v.approx?( vt ) )
-	assert( q.approx?( qt ) )
+	assert_approx_equal v, vt
+	assert_approx_equal q, qt
     end
 
     def test_composition
@@ -64,7 +64,7 @@ class TC_Eigen_Isometry3 < Minitest::Test
         v = Eigen::Vector3.new(1, 2, 3)
         q = Eigen::Quaternion.new(1, 0, 0, 0)
         t = Eigen::Isometry3.from_position_orientation( v, q )
-        assert t.approx?(t)
+        assert_approx_equal t, t
     end
 
     def test_approx_p_returns_true_on_inequality
@@ -74,6 +74,6 @@ class TC_Eigen_Isometry3 < Minitest::Test
         v = Eigen::Vector3.new(2, 2, 3)
         q = Eigen::Quaternion.new(1, 0, 0, 0)
         t2 = Eigen::Isometry3.from_position_orientation( v, q )
-        refute t1.approx?(t2)
+        refute_approx_equal t1, t2
     end
 end

@@ -90,7 +90,7 @@ class TC_Eigen_MatrixX < Minitest::Test
         end
         dumped = Marshal.dump(m)
         loaded = Marshal.load(dumped)
-        assert m.approx?(loaded)
+        assert_equal m, loaded
     end
 
     def test_dup
@@ -99,7 +99,7 @@ class TC_Eigen_MatrixX < Minitest::Test
         for i in 0..l-1
             m[i%9,i/9] = i + 1
         end
-        assert m.approx?(m.dup)
+        assert_approx_equal m, m.dup
     end
 
     def test_dotV
@@ -109,7 +109,7 @@ class TC_Eigen_MatrixX < Minitest::Test
         b = m.dotV(a)
         expected = Eigen::VectorX.from_a([1, 4, 9, 16])
         assert_kind_of Eigen::VectorX, b
-        assert(expected.approx?(b))
+        assert_approx_equal expected, b
     end
 
     def test_jacobisvd
@@ -119,7 +119,7 @@ class TC_Eigen_MatrixX < Minitest::Test
         b = Eigen::VectorX.from_a([1, 2, 3, 4, 5, 6, 7])
         a = solver.solve(b)
 
-        assert m.dotV(a).approx?(b), "expected #{m.dotV(a).to_a} to be approximately #{b.to_a}"
+        assert_approx_equal m.dotV(a), b
     end
 end
 
