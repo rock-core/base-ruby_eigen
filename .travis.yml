@@ -9,6 +9,6 @@ addons:
     apt:
         packages: libeigen3-dev
 script:
-    - rake
-    - rake test
+    - bundle exec rake
+    - bundle exec rake test
 
