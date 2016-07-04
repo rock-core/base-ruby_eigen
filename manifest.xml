@@ -1,0 +1,14 @@
+<package>
+    <description brief="Ruby bindings for the Eigen C++ linear algebra library">
+    </description>
+    <author>Sylvain Joyeux/sylvain.joyeux@m4x.org</author>
+    <copyright>
+        DFKI/robotik@dfki.de
+        Sylvain Joyeux/sylvain.joyeux@m4x.org
+    </copyright>
+    <license>LGPL v2 or later</license>
+
+    <depend package="eigen3" />
+    <depend package="rice" />
+    <tags>stable</tags>
+</package>
