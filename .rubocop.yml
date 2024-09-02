@@ -1,0 +1,11 @@
+inherit_gem:
+  rubocop-rock: defaults.yml
+
+inherit_mode:
+  merge:
+  - Exclude
+  - AllowedNames
+
+AllCops:
+  TargetRubyVersion: "2.7"
+
