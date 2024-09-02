@@ -5,7 +5,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in eigen.gemspec
 gemspec
 
-gem "bundler", "~> 1.12"
+gem "bundler"
 gem "minitest", ">= 5.0"
 gem "rake", ">= 10.0"
 gem "rake-compiler"
