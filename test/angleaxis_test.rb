@@ -1,6 +1,8 @@
-require 'test_helper'
+# frozen_string_literal: true
 
-class TC_Eigen_AngleAxis < Minitest::Test
+require "test_helper"
+
+class TCEigenAngleAxis < Minitest::Test
     def test_base
         aa = Eigen::AngleAxis.new(0, Eigen::Vector3.new(1, 0, 0))
         assert_equal(0, aa.angle)
@@ -31,7 +33,10 @@ class TC_Eigen_AngleAxis < Minitest::Test
 
     def test_approx_returns_true_on_angleaxis_that_are_different_by_epsilon
         aa1 = Eigen::AngleAxis.new(0, Eigen::Vector3.new(1, 0, 0))
-        aa2 = Eigen::AngleAxis.new(0,  Eigen::Vector3.new(1 + Float::EPSILON, 0 + Float::EPSILON, 0 + Float::EPSILON))
+        aa2 = Eigen::AngleAxis.new(
+            0, Eigen::Vector3.new(1 + Float::EPSILON,
+                                  0 + Float::EPSILON, 0 + Float::EPSILON)
+        )
         assert_approx_equal aa1, aa2
     end
 
@@ -41,22 +46,22 @@ class TC_Eigen_AngleAxis < Minitest::Test
         refute_approx_equal q1, q2
     end
 
-    def test_approx_returns_true_on_angleaxis_that_are_less_different_than_the_proqided_accuracy
+    def test_approx_returns_true_if_arg_is_less_different_than_the_proqided_accuracy
         q1 = Eigen::AngleAxis.new(1, Eigen::Vector3.new(1, 1, 1))
         q2 = Eigen::AngleAxis.new(1.5, Eigen::Vector3.new(1.5, 1.5, 1.5))
         assert_approx_equal q1, q2, 2
     end
 
     def test_from_quaternion_
-        aa = Eigen::AngleAxis.from_quaternion( Eigen::Quaternion.new(0, 1, 0, 0))
+        aa = Eigen::AngleAxis.from_quaternion(Eigen::Quaternion.new(0, 1, 0, 0))
         v = Eigen::Vector3.new(0, 1, 0)
 
-        assert_approx_equal Eigen::Vector3.new(0, -1, 0), aa*v, 0.0001
+        assert_approx_equal Eigen::Vector3.new(0, -1, 0), aa * v, 0.0001
     end
 
     def test_inverse
-        aa1 = Eigen::AngleAxis.from_euler( Eigen::Vector3.new(1, 0, 0), 2, 1, 0)
-        aa2 = Eigen::AngleAxis.from_euler( Eigen::Vector3.new(-1, 0, 0), 2, 1, 0)
+        aa1 = Eigen::AngleAxis.from_euler(Eigen::Vector3.new(1, 0, 0), 2, 1, 0)
+        aa2 = Eigen::AngleAxis.from_euler(Eigen::Vector3.new(-1, 0, 0), 2, 1, 0)
 
         assert_approx_equal aa1.to_euler, aa2.inverse.to_euler, 0.0001
     end
@@ -73,4 +78,3 @@ class TC_Eigen_AngleAxis < Minitest::Test
         assert_approx_equal aa.dup, aa, 0.0001
     end
 end
-

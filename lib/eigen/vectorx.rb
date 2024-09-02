@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Eigen
     # Abritary size vector
     class VectorX
@@ -6,10 +8,10 @@ module Eigen
         end
 
         # Returns the array value in a vector
-        def to_a()
+        def to_a
             a = []
-            for i in 0..size()-1
-                    a << self[i]
+            (0..size - 1).each do |i|
+                a << self[i]
             end
             a
         end
@@ -21,32 +23,32 @@ module Eigen
         end
 
         def from_a(array)
-            resize(array.size())
-            for i in 0..array.size()-1
+            resize(array.size)
+            (0..array.size - 1).each do |i|
                 self[i] = array[i]
             end
         end
 
-        def ==(v)
-            v.kind_of?(self.class) &&
-                __equal__(v)
+        def ==(other)
+            other.kind_of?(self.class) &&
+                __equal__(other)
         end
 
         def to_s # :nodoc:
             str = "VectorX("
-            for i in 0..size()-1
+            (0..size - 1).each do |i|
                 str += "#{self[i]} "
             end
             str[-1] = ")"
             str
         end
 
-        def _dump(level) # :nodoc:
+        def _dump(_level) # :nodoc:
             Marshal.dump(to_a)
         end
 
         def self._load(coordinates) # :nodoc:
-            m = new()
+            m = new
             m.from_a(Marshal.load(coordinates))
             m
         end

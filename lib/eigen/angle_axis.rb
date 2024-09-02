@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Eigen
     # Representation and manipulation of an angle axis
     class AngleAxis
@@ -6,11 +8,13 @@ module Eigen
         end
 
         # Returns the angle axis as [angle, x, y, z]
-        def to_a; [angle, axis.to_a] end
+        def to_a
+            [angle, axis.to_a]
+        end
 
-        def from_a (array)
-            aa = AngleAxis.new(array[0], Eigen::Vector3.new(array[1][0], array[1][1], array[1][2]))
-            aa
+        def from_a(array)
+            AngleAxis.new(array[0],
+                          Eigen::Vector3.new(array[1][0], array[1][1], array[1][2]))
         end
 
         # Returns the identity unit quaternion (identity rotation)
@@ -46,20 +50,20 @@ module Eigen
         #
         # @param [Float] eps see {#to_angle_axis}
         # @return [Vector3]
-        def to_scaled_axis(eps = 1e-12)
-            return axis * angle
+        def to_scaled_axis(_eps = 1e-12)
+            axis * angle
         end
 
         # Concatenates with another angle axis or transforms a vector
-        def *(obj)
-            if obj.kind_of?(AngleAxis)
-                concatenate(obj)
+        def *(other)
+            if other.kind_of?(AngleAxis)
+                concatenate(other)
             else
-                transform(obj)
+                transform(other)
             end
         end
 
-        def _dump(level) # :nodoc:
+        def _dump(_level) # :nodoc:
             Marshal.dump(to_a)
         end
 
@@ -81,10 +85,9 @@ module Eigen
         #   (v - other_v).norm < threshold
         #
         # instead
-        def ==(q)
-            q.kind_of?(self.class) &&
-                __equal__(q)
+        def ==(other)
+            other.kind_of?(self.class) &&
+                __equal__(other)
         end
     end
 end
-

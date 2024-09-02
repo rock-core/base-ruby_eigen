@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Eigen
     # Representation and manipulation of a quaternion
     class Quaternion
@@ -6,22 +8,25 @@ module Eigen
         end
 
         # Returns the quaternion as [w, x, y, z]
-        def to_a; [w, x, y, z] end
+        def to_a
+            [w, x, y, z]
+        end
 
         # Returns the identity unit quaternion (identity rotation)
         def self.Identity
-                Quaternion.new(1, 0, 0, 0)
+            Quaternion.new(1, 0, 0, 0)
         end
 
-        # DEPRECATED: please use identity instead. Returns the unit quaternion (identity rotation)
-        def self.Unit
-	    warn "[DEPRECATED] Quaternion.unit, please use Quaternion.identity."
-	    self.Identity
+        # DEPRECATED: please use identity instead. Returns the unit quaternion
+        # (identity rotation)
+        def self.Unit # rubocop:disable Naming/MethodName
+            warn "[DEPRECATED] Quaternion.unit, please use Quaternion.identity."
+            self.Identity
         end
 
-        # Creates a quaternion from an angle and axis description 
+        # Creates a quaternion from an angle and axis description
         def self.from_angle_axis(*args)
-                q = new(1, 0, 0, 0)
+            q = new(1, 0, 0, 0)
             q.from_angle_axis(*args)
             q
         end
@@ -37,14 +42,12 @@ module Eigen
         # @return [(Float,Vector3)] the angle and axis. The angle is in [0, PI]
         def to_angle_axis(eps = 1e-12)
             w, x, y, z = to_a
-            norm  = Math.sqrt(x*x+y*y+z*z);
-            if norm < eps
-                return 0, Eigen::Vector3.new(0,0,1);
-            end
+            norm  = Math.sqrt(x * x + y * y + z * z)
+            return 0, Eigen::Vector3.new(0, 0, 1) if norm < eps
 
-            angle = 2.0 * Math.atan2(norm, w);
+            angle = 2.0 * Math.atan2(norm, w)
             axis  = Eigen::Vector3.new(x, y, z) / norm
-            return angle, axis
+            [angle, axis]
         end
 
         # Returns a scaled axis representation that is equivalent to this
@@ -54,7 +57,7 @@ module Eigen
         # @return [Vector3]
         def to_scaled_axis(eps = 1e-12)
             angle, axis = to_angle_axis(eps)
-            return axis * angle
+            axis * angle
         end
 
         # Creates a quaternion from a set of euler angles.
@@ -95,15 +98,15 @@ module Eigen
         end
 
         # Concatenates with another quaternion or transforms a vector
-        def *(obj)
-            if obj.kind_of?(Quaternion)
-                concatenate(obj)
+        def *(other)
+            if other.kind_of?(Quaternion)
+                concatenate(other)
             else
-                transform(obj)
+                transform(other)
             end
         end
 
-        def _dump(level) # :nodoc:
+        def _dump(_level) # :nodoc:
             Marshal.dump(to_a)
         end
 
@@ -123,9 +126,9 @@ module Eigen
         #   (v - other_v).norm < threshold
         #
         # instead
-        def ==(q)
-            q.kind_of?(self.class) &&
-                __equal__(q)
+        def ==(other)
+            other.kind_of?(self.class) &&
+                __equal__(other)
         end
 
         def re
@@ -137,7 +140,7 @@ module Eigen
         end
 
         def im
-            [x,y,z]
+            [x, y, z]
         end
 
         def im=(value)
@@ -185,19 +188,19 @@ module Eigen
 
         ##
         # :method: normalize!
-        # 
+        #
         # Normalizes this quaternion
 
         ##
         # :method: normalize
-        # 
+        #
         # Returns a quaternion that is a normalized version of +self+
 
         ##
         # :method: approx?
         # :call-seq:
         #   approx?(q, tolerance)
-        # 
+        #
         # Returns true if +self+ and +q+ do not differ from more than
         # +tolerance+. The comparison is done on a coordinate basis.
 
@@ -205,7 +208,7 @@ module Eigen
         # :method: to_euler
         # :call-seq:
         #    to_euler => Eigen::Vector3(a0, a1, a2)
-        # 
+        #
         # Decomposes this quaternion in euler angles so that +self+ can be
         # obtained by applying the following rotations in order:
         #
@@ -215,7 +218,7 @@ module Eigen
         #
         #   assuming angles in range of: a0:(-pi,pi), a1:(-pi/2,pi/2), a2:(-pi/2,pi/2)
         #
-        # note that 
+        # note that
         #
         #   self == Quaternion.from_euler(to_euler, axis0, axis1, axis2)
 
@@ -223,7 +226,7 @@ module Eigen
         # :method: from_euler
         # :call-seq:
         #    from_euler(Eigen::Vector3(a0, a1, a2), axis0, axis1, axis2)
-        # 
+        #
         # Resets this quaternion so that it represents the rotation obtained by
         # applying the following rotations in order:
         #
@@ -231,17 +234,16 @@ module Eigen
         #   rotation of a1 around axis1
         #   rotation of a0 around axis0
         #
-        # note that 
+        # note that
         #
         #   self == Quaternion.from_euler(to_euler, axis0, axis1, axis2)
 
-        ## 
+        ##
         # :method: inverse
         # :call-seq:
         #   inverse => quaternion
         #
         # Computes the quaternion that is inverse of this one
-
 
         # @return [Qt::Quaternion] the Qt quaternion that is identical to this
         # one
@@ -250,4 +252,3 @@ module Eigen
         end
     end
 end
-

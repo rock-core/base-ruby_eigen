@@ -1,6 +1,8 @@
 inherit_gem:
   rubocop-rock: defaults.yml
 
+inherit_from: .rubocop_todo.yml
+
 inherit_mode:
   merge:
   - Exclude
@@ -8,4 +10,25 @@ inherit_mode:
 
 AllCops:
   TargetRubyVersion: "2.7"
+  NewCops: enable
 
+Naming/MethodName:
+  AllowedPatterns:
+  - UnitX
+  - Identity
+  - Zero
+  - UnitY
+  - UnitZ
+  - Unset
+
+Security/MarshalLoad:
+  Enabled: false
+
+Naming/MethodParameterName:
+  AllowedNames:
+  - v
+  - q
+  - m
+
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: false

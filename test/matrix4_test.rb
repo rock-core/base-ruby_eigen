@@ -1,8 +1,11 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 module Eigen
     describe Matrix4 do
         attr_reader :matrix
+
         before do
             @matrix = Matrix4.new
         end
@@ -22,7 +25,8 @@ module Eigen
                     end
                     assert_match "array should be of size maximum 16", e.message
                 end
-                it "completes missing values with zeroes if the array is smaller than 16" do
+                it "completes missing values with zeroes " \
+                   "if the array is smaller than 16" do
                     matrix.from_a((0..12).to_a)
                     assert_equal 0, matrix[1, 3]
                     assert_equal 0, matrix[2, 3]
@@ -44,7 +48,8 @@ module Eigen
                     end
                     assert_match "array should be of size maximum 16", e.message
                 end
-                it "completes missing values with zeroes if the array is smaller than 16" do
+                it "completes missing values with zeroes " \
+                   "if the array is smaller than 16" do
                     matrix.from_a((0..12).to_a, false)
                     assert_equal 0, matrix[3, 1]
                     assert_equal 0, matrix[3, 2]
@@ -65,7 +70,8 @@ module Eigen
             describe "column_major=false" do
                 it "returns the matrix values in row-major order" do
                     array = matrix.to_a(false)
-                    assert_equal [1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15, 4, 8, 12, 16], array
+                    assert_equal [1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15, 4, 8, 12, 16],
+                                 array
                 end
             end
         end
@@ -73,9 +79,10 @@ module Eigen
             before do
                 matrix.from_a((1..16).to_a)
             end
-            it "can unmarshal a value that had been marshalled with the old _dump method" do
-                def matrix._dump(level)
-                    Marshal.dump({'rows' => rows, 'cols' => cols, 'data' => to_a})
+            it "can unmarshal a value that had been marshalled " \
+               "with the old _dump method" do
+                def matrix._dump(_level)
+                    Marshal.dump({ "rows" => rows, "cols" => cols, "data" => to_a })
                 end
                 marshalled = Marshal.dump(matrix)
                 unmarshalled = Marshal.load(marshalled)
@@ -89,4 +96,3 @@ module Eigen
         end
     end
 end
-

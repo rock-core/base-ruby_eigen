@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Eigen
     # 3-dimensional vector
     class Vector3
         # Returns a vector with all values set to Base.unset
         def self.Unset
-            return Vector3.new(Base.unset, Base.unset, Base.unset)
+            Vector3.new(Base.unset, Base.unset, Base.unset)
         end
 
         def dup
@@ -11,38 +13,36 @@ module Eigen
         end
 
         # Returns the [x, y, z] tuple
-        def to_a; [x, y, z] end
+        def to_a
+            [x, y, z]
+        end
 
         # Returns the (1, 0, 0) unit vector
-        def self.UnitX()
-            return Vector3.new(1, 0, 0)
+        def self.UnitX
+            Vector3.new(1, 0, 0)
         end
 
         # Returns the (0, 1, 0) unit vector
-        def self.UnitY()
-            return Vector3.new(0, 1, 0)
+        def self.UnitY
+            Vector3.new(0, 1, 0)
         end
 
         # Returns the (0, 0, 1) unit vector
-        def self.UnitZ()
-            return Vector3.new(0, 0, 1)
+        def self.UnitZ
+            Vector3.new(0, 0, 1)
         end
 
         # returns the (0, 0, 0) vector
-        def self.Zero()
-            return Vector3.new(0, 0, 0)
+        def self.Zero
+            Vector3.new(0, 0, 0)
         end
 
         # Returns the angle formed by +self+ and +v+, oriented from +self+ to
         # +v+
         def angle_to(v)
             ret = Math.atan2(v.y, v.x) - Math.atan2(y, x)
-            if ret > Math::PI
-                ret -= 2*Math::PI
-            end
-            if ret < -Math::PI
-                ret += 2*Math::PI
-            end
+            ret -= 2 * Math::PI if ret > Math::PI
+            ret += 2 * Math::PI if ret < -Math::PI
             ret
         end
 
@@ -54,13 +54,13 @@ module Eigen
         #   q.approx?(other_q, tolerance)
         #
         # instead
-        def ==(v)
-            v.kind_of?(self.class) &&
-                __equal__(v)
+        def ==(other)
+            other.kind_of?(self.class) &&
+                __equal__(other)
         end
 
         # Support for Marshal
-        def _dump(level) # :nodoc:
+        def _dump(_level) # :nodoc:
             Marshal.dump(to_a)
         end
 
@@ -78,7 +78,7 @@ module Eigen
         end
 
         def data=(value)
-            self.x,self.y,self.z = value
+            self.x, self.y, self.z = value
         end
 
         ##
@@ -142,12 +142,12 @@ module Eigen
 
         ##
         # :method: normalize!
-        # 
+        #
         # Makes this vector unit-length
 
         ##
         # :method: normalize
-        # 
+        #
         # Returns a vector that has the same direction than +self+ but unit
         # length
 
@@ -158,15 +158,13 @@ module Eigen
         # The returned angle A is so that the rotation defined by A and axis
         # will transform +self+ into +v+
         def signed_angle_to(v, axis)
-            dot_p   = self.dot(v)
-            dir = self.cross(v).dot(axis)
+            dot_p = dot(v)
+            dir = cross(v).dot(axis)
 
             unsigned = Math.acos(dot_p / norm / v.norm)
-            if dir > 0
-                return unsigned
-            else
-                return -unsigned
-            end
+            return unsigned if dir > 0
+
+            -unsigned
         end
 
         # @return [Qt::Quaternion] the Qt vector that is identical to this

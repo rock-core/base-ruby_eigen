@@ -1,6 +1,8 @@
-require 'test_helper'
+# frozen_string_literal: true
 
-class TC_Eigen_Quaternion < Minitest::Test
+require "test_helper"
+
+class TCEigenQuaternion < Minitest::Test
     def test_base
         v = Eigen::Quaternion.new(0, 1, 2, 3)
         assert_equal(0, v.w)
@@ -42,22 +44,22 @@ class TC_Eigen_Quaternion < Minitest::Test
         refute_approx_equal q1, q2
     end
 
-    def test_approx_returns_true_on_quaternions_that_are_less_different_than_the_proqided_accuracy
+    def test_approx_returns_true_if_value_is_less_different_than_the_proqided_accuracy
         q1 = Eigen::Quaternion.new(1, 1, 1, 1)
         q2 = Eigen::Quaternion.new(1.5, 1.5, 1.5, 1.5)
         assert_approx_equal q1, q2, 2
     end
 
     def test_from_angle_axis
-	q = Eigen::Quaternion.from_angle_axis( Math::PI, Eigen::Vector3.new( 1, 0, 0 ) )
-	v = Eigen::Vector3.new(0, 1, 0)
-	
-	assert_approx_equal Eigen::Vector3.new(0, -1, 0), q*v, 0.0001
+        q = Eigen::Quaternion.from_angle_axis(Math::PI, Eigen::Vector3.new(1, 0, 0))
+        v = Eigen::Vector3.new(0, 1, 0)
+
+        assert_approx_equal Eigen::Vector3.new(0, -1, 0), q * v, 0.0001
     end
 
     def test_inverse
-	q = Eigen::Quaternion.from_euler( Eigen::Vector3.new(0.1, 0, 0), 2, 1, 0)
-	q1 = Eigen::Quaternion.from_euler( Eigen::Vector3.new(-0.1, 0, 0), 2, 1, 0)
+        q = Eigen::Quaternion.from_euler(Eigen::Vector3.new(0.1, 0, 0), 2, 1, 0)
+        q1 = Eigen::Quaternion.from_euler(Eigen::Vector3.new(-0.1, 0, 0), 2, 1, 0)
 
         assert_approx_equal q, q1.inverse
     end
@@ -83,4 +85,3 @@ class TC_Eigen_Quaternion < Minitest::Test
         assert_approx_equal q.dup, q
     end
 end
-

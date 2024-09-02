@@ -1,6 +1,8 @@
-require 'test_helper'
+# frozen_string_literal: true
 
-class TC_Eigen_Vector3 < Minitest::Test
+require "test_helper"
+
+class TCEigenVector3 < Minitest::Test
     def test_base
         v = Eigen::Vector3.new(1, 2, 3)
         assert_equal(1, v.x)
@@ -65,7 +67,7 @@ class TC_Eigen_Vector3 < Minitest::Test
         refute_approx_equal v1, v2
     end
 
-    def test_approx_returns_true_on_vectors_that_are_less_different_than_the_provided_accuracy
+    def test_approx_returns_true_on_vectors_that_are_equal_with_the_specified_accuracy
         v1 = Eigen::Vector3.new(1, 1, 1)
         v2 = Eigen::Vector3.new(1.5, 1.5, 1.5)
         assert_approx_equal v1, v2, 2
@@ -77,4 +79,3 @@ class TC_Eigen_Vector3 < Minitest::Test
         assert_equal v, Eigen::Vector3.new(1, 2, 3)
     end
 end
-

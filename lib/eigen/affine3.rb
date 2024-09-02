@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 module Eigen
+    # Representation of a 3D affine transform
     class Affine3
         def self.Identity
             Affine3.new
         end
 
-        def self.from_position_orientation( v, q )
+        def self.from_position_orientation(v, q)
             i = Affine3.Identity
-            i.prerotate( q )
-            i.pretranslate( v )
+            i.prerotate(q)
+            i.pretranslate(v)
             i
         end
 
@@ -15,16 +18,16 @@ module Eigen
             raise NotImplementedError
         end
 
-        def ==(q)
-            q.kind_of?(self.class) &&
-                __equal__(q)
+        def ==(other)
+            other.kind_of?(self.class) &&
+                __equal__(other)
         end
 
-        def *(obj)
-            if obj.kind_of?(Affine3)
-                concatenate(obj)
+        def *(other)
+            if other.kind_of?(Affine3)
+                concatenate(other)
             else
-                transform(obj)
+                transform(other)
             end
         end
 
